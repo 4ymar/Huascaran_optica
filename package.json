@@ -1,0 +1,97 @@
+{
+  "name": "optica",
+  "version": "1.0.0",
+  "author": "GiraDevs",
+  "description": "Sistema de Inventario y POS - HUASCARAN",
+  "main": "electron/main.js",
+  "scripts": {
+    "dev:backend": "cd server && node index.js",
+    "dev:frontend": "cd client && npm run dev",
+    "dev": "npm run rebuild:dev && concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "rebuild:dev": "cd server && npm rebuild better-sqlite3",
+    "prerebuild:native": "powershell -Command \"Get-Process electron -ErrorAction SilentlyContinue | Stop-Process -Force; exit 0\"",
+    "rebuild:native": "npx @electron/rebuild -f -w better-sqlite3 --module-dir server",
+    "build:frontend": "cd client && npm run build",
+    "start": "electron .",
+    "compile:backend": "npx electron compile_electron.js",
+    "electron:build": "npm run build:frontend && npm run rebuild:native && npm run compile:backend && npx electron-builder --win",
+    "release": "npm run build:frontend && npm run rebuild:native && npm run compile:backend && npx electron-builder --win --publish always"
+  },
+  "dependencies": {
+    "@fontsource/inter": "^5.2.8",
+    "electron-updater": "^6.8.9",
+    "html2canvas": "^1.4.1",
+    "wait-on": "^7.2.0"
+  },
+  "devDependencies": {
+    "@electron/rebuild": "^4.0.3",
+    "@vitejs/plugin-react": "^4.2.1",
+    "concurrently": "^8.2.2",
+    "electron": "^29.4.6",
+    "electron-builder": "^24.13.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "vite": "^5.1.6"
+  },
+  "build": {
+    "appId": "com.giradevs.optica",
+    "productName": "Optica",
+    "publish": {
+      "provider": "github",
+      "owner": "4ymar",
+      "repo": "H.Optica_release",
+      "private": false
+    },
+    "npmRebuild": false,
+    "asar": true,
+    "asarUnpack": [
+      "**/*.node"
+    ],
+    "directories": {
+      "output": "dist-electron"
+    },
+    "files": [
+      "electron/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "client/dist",
+        "to": "client/dist"
+      },
+      {
+        "from": "server",
+        "to": "server",
+        "filter": [
+          "**/*",
+          "!data/inventario.db",
+          "!data/*.db-wal",
+          "!data/*.db-shm",
+          "!data/backups/**",
+          "!licencia.js",
+          "!node_modules/@types/**",
+          "!node_modules/electron-rebuild/**",
+          "!node_modules/node-gyp/**",
+          "!node_modules/better-sqlite3/deps/**",
+          "!node_modules/**/test/**",
+          "!node_modules/**/tests/**",
+          "!node_modules/**/docs/**",
+          "!node_modules/**/*.md"
+        ]
+      }
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "electron/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "shortcutName": "Optica",
+      "language": "3082",
+      "installerIcon": "electron/icon.ico",
+      "uninstallerIcon": "electron/icon.ico"
+    }
+  }
+}

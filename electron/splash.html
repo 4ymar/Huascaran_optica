@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Huascarán</title>
+<style>
+    html, body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: linear-gradient(160deg, #0a1628 0%, #0d2a3a 40%, #0a2020 100%);
+        font-family: -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+    }
+
+    .wrap {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .geoSvg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        overflow: hidden;
+    }
+
+    .drawLine { animation: drawLine 2s ease forwards; }
+    .star     { animation: shimmerStar 2s ease-in-out infinite; }
+
+    .ridgeSweep {
+        animation: ridgeSweep 4.5s linear infinite;
+    }
+
+    .label {
+        position: relative;
+        z-index: 2;
+        margin-top: 260px;
+        font-size: 0.68rem;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: rgba(255,255,255,0.55);
+        animation: fadeIn 1s ease 0.3s both;
+    }
+
+    .dots span {
+        display: inline-block;
+        opacity: 0.3;
+        animation: pulse 1.2s ease-in-out infinite;
+    }
+    .dots span:nth-child(2) { animation-delay: 0.2s; }
+    .dots span:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes drawLine    { to { stroke-dashoffset: 0; } }
+    @keyframes shimmerStar { 0%,100% { opacity: 0.35; } 50% { opacity: 0.85; } }
+    @keyframes fadeIn      { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes pulse       { 0%,100% { opacity: 0.3; } 50% { opacity: 0.9; } }
+    @keyframes ridgeSweep  { from { stroke-dashoffset: 0; } to { stroke-dashoffset: -1080; } }
+
+    @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+        }
+    }
+</style>
+</head>
+<body>
+<div class="wrap">
+    <svg class="geoSvg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+        <defs>
+            <linearGradient id="sp-mtnL" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%"   stop-color="#1aa082" stop-opacity="0.32" />
+                <stop offset="100%" stop-color="#0a1628" stop-opacity="0" />
+            </linearGradient>
+            <linearGradient id="sp-mtnR" x1="100%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%"   stop-color="#2e6da4" stop-opacity="0.32" />
+                <stop offset="100%" stop-color="#0a1628" stop-opacity="0" />
+            </linearGradient>
+            <linearGradient id="sp-lakeG" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%"   stop-color="#1aa082" stop-opacity="0.2" />
+                <stop offset="100%" stop-color="#0a1628" stop-opacity="0" />
+            </linearGradient>
+            <linearGradient id="sp-snowG" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%"   stop-color="#dff4ee" stop-opacity="0.65" />
+                <stop offset="100%" stop-color="#9dd4c8" stop-opacity="0" />
+            </linearGradient>
+            <filter id="sp-soft">
+                <feGaussianBlur stdDeviation="2.5" />
+            </filter>
+            <filter id="sp-glow">
+                <feGaussianBlur stdDeviation="4" />
+            </filter>
+        </defs>
+
+        <!-- Montañas laterales -->
+        <polygon points="0,900 0,170 400,545" fill="url(#sp-mtnL)" />
+        <polyline points="0,170 400,545" fill="none"
+            stroke="rgba(26,160,130,0.22)" stroke-width="1"
+            stroke-dasharray="900" stroke-dashoffset="900"
+            class="drawLine" style="animation-delay:0.3s" />
+        <polygon points="0,900 0,390 210,590" fill="rgba(10,26,40,0.38)" />
+
+        <polygon points="1440,900 1440,160 1040,535" fill="url(#sp-mtnR)" />
+        <polyline points="1440,160 1040,535" fill="none"
+            stroke="rgba(46,109,164,0.2)" stroke-width="1"
+            stroke-dasharray="900" stroke-dashoffset="900"
+            class="drawLine" style="animation-delay:0.5s" />
+        <polygon points="1440,900 1440,360 1230,575" fill="rgba(10,26,40,0.38)" />
+
+        <!-- Picos extra (uno a cada lado) -->
+        <polygon points="200,240 320,420 80,420" fill="rgba(10,32,48,0.44)" />
+        <polygon points="200,240 224,308 176,308" fill="url(#sp-snowG)" filter="url(#sp-soft)" />
+
+        <polygon points="1240,260 1360,440 1120,440" fill="rgba(10,42,50,0.4)" />
+        <polygon points="1240,260 1264,328 1216,328" fill="url(#sp-snowG)" filter="url(#sp-soft)" />
+
+        <!-- Nevado central -->
+        <polygon points="720,100 845,335 595,335" fill="rgba(13,42,58,0.5)" />
+        <polygon points="720,100 770,225 670,225" fill="url(#sp-snowG)" filter="url(#sp-soft)" />
+        <polyline points="595,335 720,100 845,335" fill="none"
+            stroke="rgba(200,235,228,0.22)" stroke-width="1"
+            stroke-dasharray="500" stroke-dashoffset="500"
+            class="drawLine" style="animation-delay:0.8s" />
+
+        <!-- Picos secundarios -->
+        <polygon points="480,215 562,375 398,375" fill="rgba(10,32,48,0.44)" />
+        <polygon points="480,215 508,298 452,298" fill="url(#sp-snowG)" filter="url(#sp-soft)" />
+        <polygon points="960,235 1042,390 878,390" fill="rgba(10,42,50,0.4)" />
+        <polygon points="960,235 989,318 931,318" fill="url(#sp-snowG)" filter="url(#sp-soft)" />
+
+        <!-- Línea que recorre el perfil de los picos, de izquierda a derecha, en loop.
+             Empieza y termina a la altura de los valles (base del terreno), no en las esquinas. -->
+        <path pathLength="1000"
+            d="M0,545 L200,240 L400,545 L398,375 L480,215 L562,375 L595,335 L720,100 L845,335 L878,390 L960,235 L1042,390 L1040,535 L1240,260 L1360,440 L1440,535"
+            fill="none" stroke="rgba(223,244,238,0.55)" stroke-width="6" stroke-linecap="round"
+            stroke-dasharray="60 1000" filter="url(#sp-glow)" class="ridgeSweep" />
+        <path pathLength="1000"
+            d="M0,545 L200,240 L400,545 L398,375 L480,215 L562,375 L595,335 L720,100 L845,335 L878,390 L960,235 L1042,390 L1040,535 L1240,260 L1360,440 L1440,535"
+            fill="none" stroke="rgba(223,244,238,0.95)" stroke-width="1.5" stroke-linecap="round"
+            stroke-dasharray="60 1000" class="ridgeSweep" />
+
+        <!-- Lago -->
+        <polygon points="90,900 315,572 1125,572 1350,900" fill="url(#sp-lakeG)" />
+        <line x1="315" y1="572" x2="1125" y2="572"
+            stroke="rgba(26,160,130,0.35)" stroke-width="1"
+            stroke-dasharray="900" stroke-dashoffset="900"
+            class="drawLine" style="animation-delay:1s" />
+
+        <!-- Estrellas -->
+        <circle cx="140"  cy="60"  r="1.2" fill="rgba(160,215,205,0.6)" class="star" style="animation-delay:0.10s;animation-duration:2.28s" />
+        <circle cx="330"  cy="130" r="1.2" fill="rgba(160,215,205,0.6)" class="star" style="animation-delay:0.30s;animation-duration:2.90s" />
+        <circle cx="900"  cy="80"  r="1.2" fill="rgba(160,215,205,0.6)" class="star" style="animation-delay:0.50s;animation-duration:3.50s" />
+        <circle cx="1180" cy="150" r="1.2" fill="rgba(160,215,205,0.6)" class="star" style="animation-delay:0.70s;animation-duration:4.10s" />
+        <circle cx="1350" cy="70"  r="1.2" fill="rgba(160,215,205,0.6)" class="star" style="animation-delay:0.90s;animation-duration:4.70s" />
+    </svg>
+
+    <p class="label">Iniciando sistema<span class="dots"><span>.</span><span>.</span><span>.</span></span></p>
+</div>
+</body>
+</html>

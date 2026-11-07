@@ -1,0 +1,127 @@
+[2026-05-11T04:55:19.457Z] POST /api/licencia/activar → resultado is not defined
+ReferenceError: resultado is not defined
+    at D:\empren\MultiDispo_SisGestion\server\index.js:188:14
+    at Layer.handleRequest (D:\empren\MultiDispo_SisGestion\server\node_modules\router\lib\layer.js:152:17)
+    at next (D:\empren\MultiDispo_SisGestion\server\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (D:\empren\MultiDispo_SisGestion\server\node_modules\router\lib\route.js:117:3)
+    at handle (D:\empren\MultiDispo_SisGestion\server\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (D:\empren\MultiDispo_SisGestion\server\node_modules\router\lib\layer.js:152:17)
+    at D:\empren\MultiDispo_SisGestion\server\node_modules\router\index.js:295:15
+    at processParams (D:\empren\MultiDispo_SisGestion\server\node_modules\router\index.js:582:12)
+    at next (D:\empren\MultiDispo_SisGestion\server\node_modules\router\index.js:291:5)
+    at D:\empren\MultiDispo_SisGestion\server\index.js:144:5
+
+[2026-05-11T04:56:45.134Z] POST /api/licencia/activar → resultado is not defined
+ReferenceError: resultado is not defined
+    at D:\empren\MultiDispo_SisGestion\server\index.js:188:14
+    at Layer.handleRequest (D:\empren\MultiDispo_SisGestion\server\node_modules\router\lib\layer.js:152:17)
+    at next (D:\empren\MultiDispo_SisGestion\server\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (D:\empren\MultiDispo_SisGestion\server\node_modules\router\lib\route.js:117:3)
+    at handle (D:\empren\MultiDispo_SisGestion\server\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (D:\empren\MultiDispo_SisGestion\server\node_modules\router\lib\layer.js:152:17)
+    at D:\empren\MultiDispo_SisGestion\server\node_modules\router\index.js:295:15
+    at processParams (D:\empren\MultiDispo_SisGestion\server\node_modules\router\index.js:582:12)
+    at next (D:\empren\MultiDispo_SisGestion\server\node_modules\router\index.js:291:5)
+    at D:\empren\MultiDispo_SisGestion\server\index.js:144:5
+
+[2026-05-11T04:57:05.708Z] POST /api/licencia/activar → resultado is not defined
+ReferenceError: resultado is not defined
+    at D:\empren\MultiDispo_SisGestion\server\index.js:188:14
+    at Layer.handleRequest (D:\empren\MultiDispo_SisGestion\server\node_modules\router\lib\layer.js:152:17)
+    at next (D:\empren\MultiDispo_SisGestion\server\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (D:\empren\MultiDispo_SisGestion\server\node_modules\router\lib\route.js:117:3)
+    at handle (D:\empren\MultiDispo_SisGestion\server\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (D:\empren\MultiDispo_SisGestion\server\node_modules\router\lib\layer.js:152:17)
+    at D:\empren\MultiDispo_SisGestion\server\node_modules\router\index.js:295:15
+    at processParams (D:\empren\MultiDispo_SisGestion\server\node_modules\router\index.js:582:12)
+    at next (D:\empren\MultiDispo_SisGestion\server\node_modules\router\index.js:291:5)
+    at D:\empren\MultiDispo_SisGestion\server\index.js:144:5
+
+[2026-05-23T02:14:02.245Z] ERROR: [BACKUP] Error en backup automático: EBUSY: resource busy or locked, copyfile 'D:\empren\MultiDispo_SisGestion\server\data\inventario.db' -> 'D:\empren\MultiDispo_SisGestion\server\data\backups\automaticos\db_backup_2026-05-22_21-14-02.db'
+[2026-06-01T00:56:23.122Z] ERROR: [BACKUP] Error en backup automático: The module '\\?\D:\empren\MultiDispo_SisGestion\server\node_modules\better-sqlite3\build\Release\better_sqlite3.node'
+was compiled against a different Node.js version using
+NODE_MODULE_VERSION 137. This version of Node.js requires
+NODE_MODULE_VERSION 121. Please try re-compiling or re-installing
+the module (for instance, using `npm rebuild` or `npm install`).
+[2026-06-01T00:58:07.646Z] ERROR: [BACKUP] Error en backup automático: The module '\\?\D:\empren\MultiDispo_SisGestion\server\node_modules\better-sqlite3\build\Release\better_sqlite3.node'
+was compiled against a different Node.js version using
+NODE_MODULE_VERSION 137. This version of Node.js requires
+NODE_MODULE_VERSION 121. Please try re-compiling or re-installing
+the module (for instance, using `npm rebuild` or `npm install`).
+[2026-06-20T04:05:13.107Z] ERROR: [BACKUP] Error en backup automático: Backup automatico fallo integrity_check
+[2026-06-20T04:05:13.085Z] ERROR: [BACKUP] Error en backup automático: Backup automatico fallo integrity_check
+[2026-07-08T04:24:43.169Z] ERROR: (node:3744) electron: Failed to load URL: https://docs.google.com/gview?url=https://repositorio.nubefact.com/doc/53e0c4.pdf&embedded=true with error: ERR_BLOCKED_BY_CSP
+(Use `electron --trace-warnings ...` to show where the warning was created)
+[2026-07-22T03:45:44.906Z] ERROR: (node:14720) electron: Failed to load URL: http://localhost:3020/ with error: ERR_CONNECTION_REFUSED
+(Use `electron --trace-warnings ...` to show where the warning was created)
+[2026-07-22T03:51:58.610Z] ERROR: (node:1916) electron: Failed to load URL: http://localhost:3020/ with error: ERR_CONNECTION_REFUSED
+(Use `electron --trace-warnings ...` to show where the warning was created)
+[2026-07-22T04:07:39.945Z] ERROR: (node:20632) electron: Failed to load URL: http://localhost:3020/ with error: ERR_CONNECTION_REFUSED
+(Use `electron --trace-warnings ...` to show where the warning was created)
+[2026-07-22T04:15:10.328Z] ERROR: (node:19912) electron: Failed to load URL: http://localhost:3020/ with error: ERR_CONNECTION_REFUSED
+(Use `electron --trace-warnings ...` to show where the warning was created)
+[2026-07-22T04:32:25.364Z] ERROR: (node:12400) electron: Failed to load URL: http://localhost:3020/ with error: ERR_CONNECTION_REFUSED
+(Use `electron --trace-warnings ...` to show where the warning was created)
+[2026-07-22T04:39:20.051Z] ERROR: (node:9232) electron: Failed to load URL: http://localhost:3020/ with error: ERR_CONNECTION_REFUSED
+(Use `electron --trace-warnings ...` to show where the warning was created)
+[2026-07-22T04:46:16.439Z] ERROR: (node:18216) electron: Failed to load URL: http://localhost:3020/ with error: ERR_CONNECTION_REFUSED
+(Use `electron --trace-warnings ...` to show where the warning was created)
+[2026-07-22T04:50:48.743Z] ERROR: (node:2740) electron: Failed to load URL: http://localhost:3020/ with error: ERR_CONNECTION_REFUSED
+(Use `electron --trace-warnings ...` to show where the warning was created)
+[2026-07-22T14:06:59.072Z] ERROR: (node:9776) electron: Failed to load URL: http://localhost:3020/ with error: ERR_CONNECTION_REFUSED
+(Use `electron --trace-warnings ...` to show where the warning was created)
+[2026-07-22T14:23:59.979Z] ERROR: (node:17524) electron: Failed to load URL: http://localhost:3020/ with error: ERR_CONNECTION_REFUSED
+(Use `electron --trace-warnings ...` to show where the warning was created)
+[2026-07-22T14:48:36.938Z] ERROR: (node:1724) electron: Failed to load URL: http://localhost:3020/ with error: ERR_CONNECTION_REFUSED
+(Use `electron --trace-warnings ...` to show where the warning was created)
+[2026-07-22T15:00:51.675Z] ERROR: (node:2032) electron: Failed to load URL: http://localhost:3020/ with error: ERR_CONNECTION_REFUSED
+(Use `electron --trace-warnings ...` to show where the warning was created)
+[2026-07-22T15:09:34.419Z] ERROR: (node:15332) electron: Failed to load URL: http://localhost:3020/ with error: ERR_CONNECTION_REFUSED
+(Use `electron --trace-warnings ...` to show where the warning was created)
+[2026-07-22T15:14:20.610Z] ERROR: (node:3524) electron: Failed to load URL: http://localhost:3020/ with error: ERR_CONNECTION_REFUSED
+(Use `electron --trace-warnings ...` to show where the warning was created)
+[2026-08-08T14:45:21.262Z] ERROR: Error al procesar venta: Error: Stock insuficiente para Fierro Corrugado 3/8" x 9m (9.5mm). Disponible: 0
+[2026-08-08T15:09:04.692Z] ERROR: Error al procesar venta: Error: Stock insuficiente para Fierro Corrugado 3/8" x 9m (9.5mm). Disponible: 0
+[2026-08-08T15:09:22.375Z] ERROR: Error al procesar venta: Error: Stock insuficiente para Pintura Latex Blanco Humo CPP (4L). Disponible: 0
+[2026-08-24T01:47:43.509Z] POST /api/archivos/guardar → request entity too large
+PayloadTooLargeError: request entity too large
+    at readStream (D:\empren\MultiDispo_SisGestion\server\node_modules\raw-body\index.js:163:17)
+    at getRawBody (D:\empren\MultiDispo_SisGestion\server\node_modules\raw-body\index.js:116:12)
+    at read (D:\empren\MultiDispo_SisGestion\server\node_modules\body-parser\lib\read.js:113:3)
+    at jsonParser (D:\empren\MultiDispo_SisGestion\server\node_modules\body-parser\lib\types\json.js:88:5)
+    at Layer.handleRequest (D:\empren\MultiDispo_SisGestion\server\node_modules\router\lib\layer.js:152:17)
+    at trimPrefix (D:\empren\MultiDispo_SisGestion\server\node_modules\router\index.js:342:13)
+    at D:\empren\MultiDispo_SisGestion\server\node_modules\router\index.js:297:9
+    at processParams (D:\empren\MultiDispo_SisGestion\server\node_modules\router\index.js:582:12)
+    at next (D:\empren\MultiDispo_SisGestion\server\node_modules\router\index.js:291:5)
+    at cors (D:\empren\MultiDispo_SisGestion\server\node_modules\cors\lib\index.js:188:7)
+
+[2026-08-24T02:42:27.560Z] POST /api/archivos/guardar → request entity too large
+PayloadTooLargeError: request entity too large
+    at readStream (D:\empren\MultiDispo_SisGestion\server\node_modules\raw-body\index.js:163:17)
+    at getRawBody (D:\empren\MultiDispo_SisGestion\server\node_modules\raw-body\index.js:116:12)
+    at read (D:\empren\MultiDispo_SisGestion\server\node_modules\body-parser\lib\read.js:113:3)
+    at jsonParser (D:\empren\MultiDispo_SisGestion\server\node_modules\body-parser\lib\types\json.js:88:5)
+    at Layer.handleRequest (D:\empren\MultiDispo_SisGestion\server\node_modules\router\lib\layer.js:152:17)
+    at trimPrefix (D:\empren\MultiDispo_SisGestion\server\node_modules\router\index.js:342:13)
+    at D:\empren\MultiDispo_SisGestion\server\node_modules\router\index.js:297:9
+    at processParams (D:\empren\MultiDispo_SisGestion\server\node_modules\router\index.js:582:12)
+    at next (D:\empren\MultiDispo_SisGestion\server\node_modules\router\index.js:291:5)
+    at cors (D:\empren\MultiDispo_SisGestion\server\node_modules\cors\lib\index.js:188:7)
+
+[2026-09-03T15:44:54.583Z] Excepción no capturada: Error: write EPIPE
+    at target._send (node:internal/child_process:879:20)
+    at target.send (node:internal/child_process:752:19)
+    at Server.<anonymous> (D:\empren\MultiDispo_SisGestion\server\index.js:424:25)
+    at Object.onceWrapper (node:events:628:28)
+    at Server.emit (node:events:514:28)
+    at emitCloseNT (node:net:2273:8)
+    at process.processTicksAndRejections (node:internal/process/task_queues:81:21)
+[2026-09-03T15:44:54.583Z] ERROR: ERROR FATAL: Error: write EPIPE
+    at target._send (node:internal/child_process:879:20)
+    at target.send (node:internal/child_process:752:19)
+    at Server.<anonymous> (D:\empren\MultiDispo_SisGestion\server\index.js:424:25)
+    at Object.onceWrapper (node:events:628:28)
+    at Server.emit (node:events:514:28)
+    at emitCloseNT (node:net:2273:8)
+    at process.processTicksAndRejections (node:internal/process/task_queues:81:21)

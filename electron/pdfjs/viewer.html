@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Vista Previa de Comprobante</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #323639;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: #f1f1f1;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .toolbar {
+            height: 48px;
+            background-color: #2b2b2b;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 16px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            z-index: 10;
+        }
+        .toolbar-title {
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .toolbar-buttons {
+            display: flex;
+            gap: 8px;
+        }
+        .btn {
+            background-color: #3c4043;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: background-color 0.2s;
+        }
+        .btn:hover {
+            background-color: #4f5357;
+        }
+        .btn-primary {
+            background-color: #1a73e8;
+        }
+        .btn-primary:hover {
+            background-color: #1557b0;
+        }
+        .viewer-container {
+            flex: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            gap: 16px;
+        }
+        canvas {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+            background-color: white;
+            max-width: 100%;
+        }
+        #loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 16px;
+            color: #ccc;
+        }
+
+        @media print {
+            body {
+                background-color: white;
+                color: black;
+            }
+            .toolbar {
+                display: none !important;
+            }
+            .viewer-container {
+                padding: 0;
+                margin: 0;
+                overflow: visible;
+                display: block;
+            }
+            canvas {
+                box-shadow: none;
+                margin: 0;
+                display: block;
+                page-break-after: always;
+            }
+        }
+    </style>
+    <script src="pdf.min.js"></script>
+</head>
+<body>
+    <div class="toolbar">
+        <div class="toolbar-title" id="title">Vista Previa del Ticket</div>
+        <div class="toolbar-buttons">
+            <button class="btn" onclick="zoomOut()">🔍- Alejar</button>
+            <button class="btn" onclick="zoomIn()">🔍+ Acercar</button>
+            <button class="btn btn-primary" onclick="window.print()">🖨️ Imprimir</button>
+        </div>
+    </div>
+    <div class="viewer-container" id="viewer">
+        <div id="loading">Cargando documento...</div>
+    </div>
+
+    <script>
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'pdf.worker.min.js';
+
+        let currentPdf = null;
+        let scale = 1.5;
+
+        window.renderPDF = async function(base64Data, anchoMM) {
+            try {
+                document.getElementById('loading').style.display = 'block';
+                const viewer = document.getElementById('viewer');
+                
+                // Limpiar vistas anteriores
+                const canvases = viewer.querySelectorAll('canvas');
+                canvases.forEach(c => c.remove());
+
+                // Convertir base64 a Uint8Array
+                const raw = window.atob(base64Data);
+                const rawLength = raw.length;
+                const array = new Uint8Array(new ArrayBuffer(rawLength));
+                for(let i = 0; i < rawLength; i++) {
+                    array[i] = raw.charCodeAt(i);
+                }
+
+                // Cargar documento
+                const loadingTask = pdfjsLib.getDocument({ data: array });
+                currentPdf = await loadingTask.promise;
+                
+                document.getElementById('loading').style.display = 'none';
+                await renderAllPages(anchoMM);
+            } catch (err) {
+                console.error(err);
+                document.getElementById('loading').innerText = 'Error al cargar el PDF: ' + err.message;
+            }
+        };
+
+        async function renderAllPages(anchoMM) {
+            const anchoTargetPx = (anchoMM || 80) / 25.4 * 96;
+            if (!currentPdf) return;
+            const viewer = document.getElementById('viewer');
+            
+            // Limpiar
+            const canvases = viewer.querySelectorAll('canvas');
+            canvases.forEach(c => c.remove());
+
+            for (let pageNum = 1; pageNum <= currentPdf.numPages; pageNum++) {
+                const page = await currentPdf.getPage(pageNum);
+                const rawViewport = page.getViewport({ scale: 1 });
+                const scaleFit = anchoTargetPx / rawViewport.width;
+                const viewport = page.getViewport({ scale: scaleFit });
+
+                const canvas = document.createElement('canvas');
+                canvas.id = 'page-' + pageNum;
+                viewer.appendChild(canvas);
+
+                const context = canvas.getContext('2d');
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
+
+                await page.render({
+                    canvasContext: context,
+                    viewport: viewport
+                }).promise;
+            }
+        }
+
+        function zoomIn() {
+            scale += 0.25;
+            renderAllPages();
+        }
+
+        function zoomOut() {
+            if (scale > 0.5) {
+                scale -= 0.25;
+                renderAllPages();
+            }
+        }
+    </script>
+</body>
+</html>

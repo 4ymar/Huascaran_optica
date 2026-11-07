@@ -1,0 +1,449 @@
+/* Login.module.css */
+
+.root {
+  --teal:    #1aa082;
+  --teal-lt: #22c9a0;
+  --teal-dk: #127a62;
+  --teal2:   #2e6da4;
+  --dark:    #0a1628;
+  --dark2:   #0d2a3a;
+  --dark3:   #0a2020;
+
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  font-family: 'DM Sans', sans-serif;
+  overflow: hidden;
+  position: relative;
+  background: linear-gradient(160deg, var(--dark) 0%, var(--dark2) 40%, var(--dark3) 100%);
+}
+
+/* ── Fondos ── */
+.bgPhoto {
+  position: absolute; inset: 0;
+  background-image: var(--bg-url);
+  background-size: cover;
+  background-position: center 25%;
+  z-index: 0;
+}
+
+.bgOverlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg,rgba(10,22,40,0.78) 0%,rgba(13,42,58,0.68) 40%,rgba(10,32,32,0.55) 100%);
+  z-index: 1;
+}
+
+.bgGrid {
+  position: absolute; inset: 0; z-index: 2;
+  background-image:
+    linear-gradient(rgba(26,160,130,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(26,160,130,0.04) 1px, transparent 1px);
+  background-size: 54px 54px;
+  pointer-events: none;
+}
+
+.dotGrid {
+  position: absolute; top: 0; right: 0; z-index: 2;
+  width: 220px; height: 220px;
+  background-image: radial-gradient(rgba(26,160,130,0.2) 1px, transparent 1px);
+  background-size: 22px 22px;
+  mask-image: radial-gradient(ellipse 65% 65% at 85% 15%, black 20%, transparent 75%);
+  pointer-events: none;
+}
+
+/* ── SVG geo ── */
+.geo {
+  position: absolute; inset: 0; z-index: 2;
+  pointer-events: none; overflow: hidden;
+}
+
+.drawLine {
+  animation: drawLine 2.2s ease forwards;
+}
+
+/* ── Esquinas ── */
+.corner { position: absolute; width: 44px; height: 44px; pointer-events: none; z-index: 3; }
+.cTl { top:22px;    left:22px;  border-top:1.5px solid rgba(26,160,130,0.5);  border-left:1.5px solid rgba(26,160,130,0.5); }
+.cTr { top:22px;    right:22px; border-top:1.5px solid rgba(46,109,164,0.35); border-right:1.5px solid rgba(46,109,164,0.35); }
+.cBl { bottom:22px; left:22px;  border-bottom:1.5px solid rgba(46,109,164,0.35); border-left:1.5px solid rgba(46,109,164,0.35); }
+.cBr { bottom:22px; right:22px; border-bottom:1.5px solid rgba(26,160,130,0.5);  border-right:1.5px solid rgba(26,160,130,0.5); }
+
+/* ── Layout interior ── */
+.inner {
+  position: relative; z-index: 10;
+  width: 100%; height: 100%;
+  display: flex; align-items: stretch;
+}
+
+/* ── Panel izquierdo ── */
+.hero {
+  flex: 1;
+  display: flex; flex-direction: column;
+  justify-content: space-between;
+  padding: 44px 52px;
+}
+
+.heroTop { display: flex; flex-direction: column; padding-top: 8px; }
+
+.heroLogo {
+  width: 260px; max-width: 54%;
+  filter: brightness(0) invert(1) drop-shadow(0 2px 16px rgba(26,160,130,0.35));
+  display: block;
+  animation: fadeUp 0.7s ease 0.1s both;
+}
+
+.heroMiddle {
+  flex: 1; display: flex; flex-direction: column;
+  justify-content: center; padding: 16px 0 14px;
+}
+
+.heroHeadline {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 2.5rem; font-weight: 700;
+  color: #fff; line-height: 1.1;
+  letter-spacing: -0.025em;
+  animation: fadeUp 0.7s ease 0.2s both;
+}
+.accent { color: var(--teal-lt); }
+
+.heroDivider {
+  width: 40px; height: 2px; background: var(--teal);
+  border-radius: 2px; margin: 14px 0 16px;
+  animation: fadeUp 0.7s ease 0.28s both;
+}
+
+.heroSub {
+  font-size: 0.88rem; font-weight: 300;
+  color: rgba(255,255,255,0.55); line-height: 1.7;
+  max-width: 380px; margin-bottom: 32px;
+  animation: fadeUp 0.7s ease 0.34s both;
+}
+
+.heroFeatures { display: flex; gap: 10px; animation: fadeUp 0.7s ease 0.4s both; }
+
+.featureCard {
+  flex: 1;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(26,160,130,0.22);
+  border-radius: 12px; padding: 16px 13px 13px;
+  backdrop-filter: blur(10px);
+  transition: background 0.25s, border-color 0.25s, transform 0.2s;
+}
+.featureCard:hover {
+  background: rgba(26,160,130,0.1);
+  border-color: rgba(26,160,130,0.45);
+  transform: translateY(-2px);
+}
+
+.featureIcon {
+  width: 36px; height: 36px;
+  background: rgba(26,160,130,0.14);
+  border: 1px solid rgba(26,160,130,0.32);
+  border-radius: 9px;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 10px; color: var(--teal-lt);
+}
+.featureTitle { font-size: 0.76rem; font-weight: 600; color: #fff; margin-bottom: 5px; }
+.featureDesc  { font-size: 0.67rem; font-weight: 300; color: rgba(255,255,255,0.44); line-height: 1.5; }
+
+/* ── Panel derecho glass ── */
+.formPanel {
+  width: 430px; flex-shrink: 0;
+  background: rgba(10,22,40,0.72);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  border-left: 1px solid rgba(26,160,130,0.18);
+  display: flex; flex-direction: column;
+  justify-content: center; padding: 52px 46px;
+  position: relative;
+  animation: slideIn 0.6s ease both;
+}
+
+.formPanel::before {
+  content: '';
+  position: absolute; top: 0; left: 0;
+  width: 3px; height: 100%;
+  background: linear-gradient(180deg, var(--teal) 0%, var(--teal2) 100%);
+}
+
+.formPanel::after {
+  content: '';
+  position: absolute; top: -60px; left: -60px;
+  width: 180px; height: 180px;
+  background: radial-gradient(circle, rgba(26,160,130,0.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* ── Cabecera del formulario ── */
+.formHead { margin-bottom: 30px; animation: fadeUp 0.55s ease 0.18s both; }
+
+.formEyebrow {
+  font-size: 0.64rem; font-weight: 600;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--teal-lt); margin-bottom: 10px;
+}
+.formTitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.4rem; font-weight: 700;
+  color: #fff; line-height: 1;
+  letter-spacing: -0.02em; margin-bottom: 8px;
+}
+.formSub { font-size: 0.83rem; color: rgba(255,255,255,0.4); font-weight: 300; }
+
+/* ── Campos ── */
+.fieldGroup { display: flex; flex-direction: column; gap: 16px; margin-bottom: 16px; }
+.field      { display: flex; flex-direction: column; gap: 6px; }
+
+.fieldLabel {
+  font-size: 0.68rem; font-weight: 600;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 0.1em; text-transform: uppercase;
+  display: flex; align-items: center; gap: 6px;
+}
+
+.fieldWrap { position: relative; }
+
+.fieldIcon {
+  position: absolute; left: 13px; top: 50%;
+  transform: translateY(-50%);
+  color: rgba(255,255,255,0.28); pointer-events: none;
+  transition: color 0.2s;
+}
+
+.fieldInput {
+  width: 100%; padding: 13px 13px 13px 40px;
+  border: 1px solid rgba(26,160,130,0.22);
+  border-radius: 8px;
+  font-size: 0.9rem; font-family: 'DM Sans', sans-serif;
+  color: #fff;
+  background: rgba(255,255,255,0.06);
+  transition: all 0.22s; outline: none;
+}
+.fieldInput::placeholder { color: rgba(255,255,255,0.22); }
+.fieldInput:focus {
+  border-color: rgba(26,160,130,0.7);
+  background: rgba(26,160,130,0.08);
+  box-shadow: 0 0 0 3px rgba(26,160,130,0.13);
+}
+.fieldWrap:focus-within .fieldIcon { color: var(--teal-lt); }
+.fieldInput:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.togglePw {
+  position: absolute; right: 12px; top: 50%;
+  transform: translateY(-50%);
+  background: none; border: none; cursor: pointer;
+  color: rgba(255,255,255,0.28); padding: 0;
+  display: flex; align-items: center; transition: color 0.2s;
+}
+.togglePw:hover { color: var(--teal-lt); }
+
+/* ── Opciones del form ── */
+.formOptions  { display: flex; align-items: center; margin-bottom: 22px; animation: fadeUp 0.55s ease 0.39s both; }
+.rememberLabel { display: flex; align-items: center; gap: 9px; cursor: pointer; user-select: none; }
+.rememberCheck {
+  width: 17px; height: 17px;
+  border: 1.5px solid rgba(255,255,255,0.2);
+  border-radius: 4px;
+  appearance: none; -webkit-appearance: none;
+  background: rgba(255,255,255,0.06);
+  cursor: pointer; position: relative;
+  transition: all 0.18s; flex-shrink: 0;
+}
+.rememberCheck:checked { background: var(--teal); border-color: var(--teal); }
+.rememberCheck:checked::after {
+  content: ''; position: absolute; top: 2px; left: 5px;
+  width: 4px; height: 7px;
+  border: 2px solid white; border-top: none; border-left: none;
+  transform: rotate(45deg);
+}
+.rememberText { font-size: 0.82rem; color: rgba(255,255,255,0.42); }
+
+/* ── Campos con animación escalonada ── */
+.fieldA1 { animation: fadeUp 0.55s ease 0.26s both; }
+.fieldA2 { animation: fadeUp 0.55s ease 0.33s both; }
+
+/* ── Botón submit ── */
+.btnWrap { animation: fadeUp 0.55s ease 0.45s both; }
+
+.btnSubmit {
+  width: 100%; padding: 14px;
+  border: 1.5px solid var(--teal-lt);
+  border-radius: 8px;
+  background: var(--teal);
+  color: white; font-family: 'DM Sans', sans-serif;
+  font-size: 0.82rem; font-weight: 600;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  transition: background 0.22s, transform 0.18s, box-shadow 0.22s;
+  position: relative; overflow: hidden; margin-bottom: 22px;
+}
+.btnSubmit::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.13) 50%, transparent 60%);
+  transform: translateX(-100%); transition: transform 0.45s ease;
+}
+.btnSubmit:hover:not(:disabled) {
+  background: var(--teal-lt); border-color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 36px rgba(26,160,130,0.45);
+}
+.btnSubmit:hover:not(:disabled)::after { transform: translateX(100%); }
+.btnSubmit:active:not(:disabled) { transform: translateY(0); background: var(--teal-dk); box-shadow: none; }
+.btnSubmit:disabled { opacity: 0.55; cursor: not-allowed; }
+
+/* ── WhatsApp help ── */
+.waHelp {
+  display: flex; align-items: center; justify-content: center; gap: 7px;
+  font-size: 0.79rem; color: rgba(255,255,255,0.28); text-align: center;
+  animation: fadeUp 0.55s ease 0.51s both;
+}
+.waLink {
+  display: inline-flex; align-items: center; gap: 5px;
+  color: #25D366; font-weight: 600; cursor: pointer;
+  background: none; border: none;
+  font-family: 'DM Sans', sans-serif; font-size: 0.79rem; padding: 0;
+  transition: opacity 0.2s;
+}
+.waLink:hover { opacity: 0.75; }
+
+/* ── Spinner ── */
+.spinnerRing {
+  width: 17px; height: 17px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: white; border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+/* ── Loading screen (verificando token) ── */
+.loadingScreen {
+  display: flex; height: 100vh; justify-content: center; align-items: center;
+  background: linear-gradient(160deg, var(--dark), var(--dark2), var(--dark3));
+  flex-direction: column; gap: 18px;
+}
+.loadingLogo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem; font-weight: 700;
+  background: linear-gradient(135deg, #1aa082, #2e6da4);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.loadingRing {
+  width: 28px; height: 28px;
+  border: 2px solid rgba(26,160,130,0.2);
+  border-top-color: rgba(26,160,130,0.85);
+  border-radius: 50%; animation: spin 0.8s linear infinite;
+}
+
+/* ── Keyframes ── */
+@keyframes spin    { to { transform: rotate(360deg); } }
+@keyframes drawLine { to { stroke-dashoffset: 0; } }
+@keyframes fadeUp  { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:translateY(0); } }
+@keyframes slideIn { from { opacity:0; transform:translateX(32px); } to { opacity:1; transform:translateX(0); } }
+
+/* ── Modal de recuperación de acceso ── */
+.modalOverlay {
+  position: fixed; inset: 0; z-index: 100;
+  background: rgba(5,12,22,0.72);
+  backdrop-filter: blur(4px);
+  display: flex; align-items: center; justify-content: center;
+  animation: fadeUp 0.25s ease both;
+}
+
+.modalCard {
+  width: 420px; max-width: 92vw;
+  max-height: 86vh; overflow-y: auto;
+  background: rgba(10,22,40,0.92);
+  backdrop-filter: blur(22px);
+  border: 1px solid rgba(26,160,130,0.25);
+  border-radius: 14px;
+  padding: 36px 32px 28px;
+  position: relative;
+  box-shadow: 0 24px 70px rgba(0,0,0,0.5);
+  animation: fadeUp 0.3s ease 0.05s both;
+}
+
+.modalClose {
+  position: absolute; top: 16px; right: 16px;
+  background: rgba(255,255,255,0.06); border: none;
+  color: rgba(255,255,255,0.5); cursor: pointer;
+  width: 30px; height: 30px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s, color 0.2s;
+}
+.modalClose:hover { background: rgba(255,255,255,0.12); color: #fff; }
+
+.modalError {
+  background: rgba(220,38,38,0.12);
+  border: 1px solid rgba(220,38,38,0.4);
+  border-radius: 8px;
+  padding: 10px 14px;
+  color: #f87171;
+  font-size: 0.8rem;
+  margin-bottom: 14px;
+}
+
+/* Lista de usuarios (paso 2) */
+.userList {
+  display: flex; flex-direction: column; gap: 8px;
+  margin-bottom: 18px; max-height: 260px; overflow-y: auto;
+}
+
+.userCard {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 14px;
+  border: 1px solid rgba(26,160,130,0.18);
+  border-radius: 10px;
+  background: rgba(255,255,255,0.04);
+  color: rgba(255,255,255,0.7);
+  cursor: pointer;
+  transition: background 0.18s, border-color 0.18s;
+}
+.userCard:hover { background: rgba(26,160,130,0.08); border-color: rgba(26,160,130,0.35); }
+
+.userCardSelected {
+  background: rgba(26,160,130,0.14);
+  border-color: var(--teal-lt);
+}
+
+.userCardName { font-size: 0.85rem; font-weight: 600; color: #fff; }
+.userCardMeta { font-size: 0.72rem; color: rgba(255,255,255,0.42); margin-top: 2px; }
+
+/* Contraseña temporal (paso 3) */
+.passwordBox {
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(26,160,130,0.1);
+  border: 1px solid rgba(26,160,130,0.4);
+  border-radius: 10px;
+  padding: 14px 16px;
+}
+
+.passwordValue {
+  font-family: monospace;
+  font-size: 1.1rem; font-weight: 700;
+  letter-spacing: 1.5px;
+  color: var(--teal-lt);
+}
+
+.copyBtn {
+  background: rgba(255,255,255,0.08); border: none;
+  color: rgba(255,255,255,0.6); cursor: pointer;
+  width: 32px; height: 32px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s, color 0.2s;
+}
+.copyBtn:hover { background: rgba(255,255,255,0.16); color: #fff; }
+
+/* ── Responsive ── */
+@media (max-width: 860px) {
+  .hero { display: none; }
+  .formPanel { width: 100%; padding: 48px 28px; }
+}
+
+/* ── Accesibilidad ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
